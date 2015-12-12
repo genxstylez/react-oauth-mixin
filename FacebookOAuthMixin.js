@@ -2,9 +2,9 @@ export default {
     componentDidMount() {
         window.fbAsyncInit = function() {
             FB.init({
-                appId      : {your-app-id},
+                appId      : FACEBOOK_ID,
                 xfbml      : true,
-                version    : 'v2.4'
+                version    : 'v2.5'
             });
             FB.getLoginStatus(function(response) {
                 this.statusChangeCallback(response);
@@ -21,27 +21,4 @@ export default {
             fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
     },
-
-    statusChangeCallback(response) {
-        if (response.status === 'connected') {
-            var access_token = response.authResponse.accessToken;
-            console.log(access_token);
-        } else if (response.status === 'not_authorized') {
-            console.log('not not_authorized');
-        } else {
-            console.log('not logged into facebook');
-        }
-    },
-    checkLoginState() {
-        FB.getLoginStatus((response) => {
-            this.statusChangeCallback(response);
-        }.bind(this))
-    },
-
-    handleClickFb() {
-        FB.login((response) => {
-            this.statusChangeCallback(response);
-        });
-    },
-
 }
